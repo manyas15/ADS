@@ -1,58 +1,54 @@
-public class RemoveEleLL {
-    static class Node {
-        int data;
-        Node next;
 
-        Node(int data) {
-            this.data = data;
-            this.next = null;
+
+public class RemoveEleLL {
+
+    public class ListNode {
+
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
         }
     }
 
-    public static Node removeElement(Node head, int val) {
-        while (head != null && head.data == val) {
-            head = head.next;
-        }
-
-        Node current = head;
-
-        while (current != null && current.next != null) {
-            if (current.next.data == val) {
-                current.next = current.next.next;
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode prev = dummy;
+        while (prev.next != null) {
+            if (prev.next.val == val) {
+                prev.next = prev.next.next;
             } else {
-                current = current.next;
+                prev = prev.next;
             }
         }
-
-        return head;
-    }
-
-    public static void printList(Node head) {
-        Node current = head;
-        while (current != null) {
-            System.out.print(current.data + " ");
-            current = current.next;
-        }
-        System.out.println();
+        return dummy.next;
     }
 
     public static void main(String[] args) {
-        Node head = new Node(1);
-        head.next = new Node(2);
-        head.next.next = new Node(6);
-        head.next.next.next = new Node(3);
-        head.next.next.next.next = new Node(4);
-        head.next.next.next.next.next = new Node(5);
-        head.next.next.next.next.next.next = new Node(6);
-
-        System.out.println("Original list:");
-        printList(head);
-
+        RemoveEleLL solution = new RemoveEleLL();
+        ListNode head = solution.new ListNode(1);
+        head.next = solution.new ListNode(2);
+        head.next.next = solution.new ListNode(6);
+        head.next.next.next = solution.new ListNode(3);
+        head.next.next.next.next = solution.new ListNode(4);
+        head.next.next.next.next.next = solution.new ListNode(5);
+        head.next.next.next.next.next.next = solution.new ListNode(6);
         int valToRemove = 6;
-        head = removeElement(head, valToRemove);
-
-        System.out.println("List after removing " + valToRemove + ":");
-        printList(head);
+        ListNode result = solution.removeElements(head, valToRemove);
+        while (result != null) {
+            System.out.print(result.val + " "); // Output: 1 2 3 4 5
+            result = result.next;
+        }
     }
 }
 
