@@ -1,4 +1,4 @@
-// 68 leetcode
+// 98 leetcode
 public class ValidBST{
     public boolean isValidBST(TreeNode root) {
         return isValidate(root, Long.MIN_VALUE, Long.MAX_VALUE);
